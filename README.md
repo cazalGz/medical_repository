@@ -133,7 +133,7 @@ Request Header:
 Authorization: Bearer <token_jwt>
 
 
-## Example to use
+## How to use
 
 To use the API, you must first create the database in MySQL, then set the database url and MySQL user credentials in the application.properties file.
 
