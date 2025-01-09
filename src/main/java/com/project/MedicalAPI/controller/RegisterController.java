@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/register")
 public class RegisterController {
     @Autowired
-    private UserRepository usuarioRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @PostMapping
     public ResponseEntity registerUser(@RequestBody UserRegisterData userRegisterData) {
-        if (usuarioRepository.findByLogin(userRegisterData.login()) != null) {
+        if (userRepository.findByLogin(userRegisterData.login()) != null) {
             return ResponseEntity.badRequest().body("User name is already in use.");
         }
 
@@ -31,7 +31,7 @@ public class RegisterController {
 
 
         User newUser = new User(null, userRegisterData.login(), passwordEncripted);
-        usuarioRepository.save(newUser);
+        userRepository.save(newUser);
 
         return ResponseEntity.ok("user registered successful");
     }

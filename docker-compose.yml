@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  db:
+    image: mysql
+    container_name: medicalApi-db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: medical_api
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - medicalApi-network
+  app:
+    container_name: medicalApi-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DB_URL: ${DB_URL}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+    restart: on-failure
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    networks:
+      - medicalApi-network
+
+volumes:
+  db_data:
+
+networks:
+  medicalApi-network:

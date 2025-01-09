@@ -18,21 +18,19 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Autowired
     private TokenService tokenService;
     @Autowired
-    private UserRepository usuarioRepository;
-
+    private UserRepository userRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        // Obtener el token del header
+
         var authHeader = request.getHeader("Authorization");
         if (authHeader != null) {
             var token = authHeader.replace("Bearer ", "");
-            var nombreUsuario = tokenService.getSubject(token); // extract username
-            if (nombreUsuario != null) {
-                // Token valido
-                var usuario = usuarioRepository.findByLogin(nombreUsuario);
+            var userName = tokenService.getSubject(token); // extract username
+            if (userName != null) {
+                var usuario = userRepository.findByLogin(userName);
                 var authentication = new UsernamePasswordAuthenticationToken(usuario, null,
-                        usuario.getAuthorities()); // Forzamos un inicio de sesion
+                        usuario.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }

@@ -6,7 +6,7 @@ public record DirectionData(
         @NotBlank
         String street,
         @NotBlank
-        String distrit,
+        String district,
         @NotBlank
         String city,
         @NotBlank

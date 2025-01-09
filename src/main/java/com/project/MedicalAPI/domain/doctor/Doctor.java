@@ -43,7 +43,7 @@ public class Doctor {
             this.document = doctorUpdateData.document();
         }
         if (doctorUpdateData.direction() != null) {
-            this.direction = direction.actualizarDatos(doctorUpdateData.direction());
+            this.direction = direction.updateData(doctorUpdateData.direction());
         }
     }
 

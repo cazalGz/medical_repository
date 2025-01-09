@@ -43,7 +43,7 @@ public class DoctorController {
     public ResponseEntity<DoctorResponseData> getDoctorData(@PathVariable Long id) {
         Doctor doctor = doctorRepository.getReferenceById(id);
         var doctorData = new DoctorResponseData(doctor.getId(), doctor.getName(), doctor.getEmail(), doctor.getTelephone(), doctor.getDocument(), doctor.getSpeciality().toString(),
-                new DirectionData(doctor.getDirection().getStreet(), doctor.getDirection().getDistrit(),
+                new DirectionData(doctor.getDirection().getStreet(), doctor.getDirection().getDistrict(),
                         doctor.getDirection().getCity(), doctor.getDirection().getNumber(),
                         doctor.getDirection().getComplement()));
         return ResponseEntity.ok(doctorData);
@@ -55,7 +55,7 @@ public class DoctorController {
         Doctor doctor = doctorRepository.save(new Doctor(doctorRegistrationData));
         DoctorResponseData doctorResponseData = new DoctorResponseData(doctor.getId(), doctor.getName(), doctor.getEmail(),
                 doctor.getTelephone(), doctor.getDocument(),doctor.getSpeciality().toString(),
-                new DirectionData(doctor.getDirection().getStreet(), doctor.getDirection().getDistrit(),
+                new DirectionData(doctor.getDirection().getStreet(), doctor.getDirection().getDistrict(),
                         doctor.getDirection().getCity(), doctor.getDirection().getNumber(),
                         doctor.getDirection().getComplement()));
 
@@ -71,7 +71,7 @@ public class DoctorController {
         doctor.UpdateData(doctorUpdateData);
         return ResponseEntity.ok(new DoctorResponseData(doctor.getId(), doctor.getName(), doctor.getEmail(),
                 doctor.getTelephone(), doctor.getDocument(),doctor.getSpeciality().toString(),
-                new DirectionData(doctor.getDirection().getStreet(), doctor.getDirection().getDistrit(),
+                new DirectionData(doctor.getDirection().getStreet(), doctor.getDirection().getDistrict(),
                         doctor.getDirection().getCity(), doctor.getDirection().getNumber(),
                         doctor.getDirection().getComplement())));
     }

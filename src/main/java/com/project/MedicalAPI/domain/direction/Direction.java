@@ -13,21 +13,21 @@ public class Direction {
     private String street;
     private String number;
     private String complement;
-    private String distrit;
+    private String district;
     private String city;
 
     public Direction(DirectionData direction) {
         this.street = direction.street();
         this.number = direction.number();
-        this.distrit = direction.distrit();
+        this.district = direction.district();
         this.complement = direction.complement();
         this.city = direction.city();
     }
 
-    public Direction actualizarDatos(DirectionData direction) {
+    public Direction updateData(DirectionData direction) {
         this.street = direction.street();
         this.number = direction.number();
-        this.distrit = direction.distrit();
+        this.district = direction.district();
         this.complement = direction.complement();
         this.city = direction.city();
         return this;
