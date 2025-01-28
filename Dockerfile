@@ -1,14 +1,21 @@
+# Stage 1: build
 FROM maven:3.9.5-eclipse-temurin-17 AS build
-EXPOSE 8080
+WORKDIR /app
 
-WORKDIR /root
-COPY ./pom.xml /root
-COPY ./.mvn /root/.mvn
-COPY ./mvnw /root
-
+COPY ./pom.xml ./
+COPY ./.mvn ./.mvn
+COPY ./mvnw ./
 RUN ./mvnw dependency:go-offline
 
-COPY ./src /root/src
-
+COPY ./src ./src
 RUN ./mvnw clean install -DskipTests
-ENTRYPOINT ["java", "-jar", "/root/target/MedicalAPI.jar"]
+
+# Stage 2: run
+FROM eclipse-temurin:17-jdk-alpine
+WORKDIR /app
+
+COPY --from=build /app/target/MedicalAPI.jar app.jar
+
+EXPOSE 8080
+
+ENTRYPOINT ["java", "-jar", "app.jar"]

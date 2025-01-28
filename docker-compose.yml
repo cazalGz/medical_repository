@@ -9,8 +9,6 @@ services:
       MYSQL_DATABASE: medical_api
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASSWORD}
-    ports:
-      - "3307:3306"
     volumes:
       - db_data:/var/lib/mysql
     networks:
